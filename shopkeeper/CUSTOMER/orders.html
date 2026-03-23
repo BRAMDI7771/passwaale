@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Karo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+    <button class="lang-btn" onclick="setLang('hi')" id="btn-hi">हि</button>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <a href="shop.html" class="back-btn" data-en="← Back" data-hi="← वापस">← Back</a>
+    <h1 data-en="Place Order" data-hi="ऑर्डर दो">Place Order</h1>
+    <p data-en="Rajesh Kirana" data-hi="राजेश किराना">Rajesh Kirana</p>
+  </div>
+
+  <div class="container">
+
+    <!-- Delivery Type -->
+    <p class="section-title" data-en="Delivery Type" data-hi="डिलीवरी टाइप">Delivery Type</p>
+    <div class="card">
+      <div class="option-row" onclick="selectOption('delivery')">
+        <div class="option-left">
+          <span class="option-icon">🛵</span>
+          <div>
+            <p class="option-title" data-en="Home Delivery" data-hi="होम डिलीवरी">Home Delivery</p>
+            <p class="option-sub" data-en="In 20-30 mins" data-hi="20-30 मिनट में">In 20-30 mins</p>
+          </div>
+        </div>
+        <div class="radio" id="delivery">●</div>
+      </div>
+      <div class="divider"></div>
+      <div class="option-row" onclick="selectOption('pickup')">
+        <div class="option-left">
+          <span class="option-icon">🏪</span>
+          <div>
+            <p class="option-title" data-en="Pickup" data-hi="पिकअप">Pickup</p>
+            <p class="option-sub" data-en="Collect from shop" data-hi="दुकान से ले आओ">Collect from shop</p>
+          </div>
+        </div>
+        <div class="radio" id="pickup">○</div>
+      </div>
+    </div>
+
+    <!-- Address -->
+    <p class="section-title" data-en="Your Address" data-hi="आपका पता">Your Address</p>
+    <div class="card">
+      <input
+        type="text"
+        id="addressInput"
+        class="address-input"
+        data-en="Enter your address..."
+        data-hi="अपना पता लिखो..."
+        placeholder="Enter your address..."
+      />
+    </div>
+
+    <!-- Order Summary -->
+    <p class="section-title" data-en="Order Summary" data-hi="ऑर्डर सारांश">Order Summary</p>
+    <div class="card">
+      <div class="summary-row">
+        <span class="summary-label" data-en="Atta 1kg" data-hi="आटा 1 किलो">Atta 1kg</span>
+        <span class="summary-amount">₹55</span>
+      </div>
+      <div class="summary-row">
+        <span class="summary-label" data-en="Chawal 2kg" data-hi="चावल 2 किलो">Chawal 2kg</span>
+        <span class="summary-amount">₹120</span>
+      </div>
+      <div class="divider"></div>
+      <div class="summary-row">
+        <span class="summary-label" style="font-weight:700"
+          data-en="Total" data-hi="कुल">Total</span>
+        <span class="summary-amount" style="font-weight:700;color:#1B7A45">₹175</span>
+      </div>
+    </div>
+
+    <!-- Place Order Button -->
+    <button class="btn-order" id="placeBtn" onclick="placeOrder()"
+      data-en="Place Order" data-hi="ऑर्डर दो">
+      Place Order
+    </button>
+
+  </div>
+
+  <script src="../lang.js"></script>
+
+  <script type="module">
+    import { saveOrder } from '../firebase.js';
+
+    var selected = 'delivery';
+
+    window.selectOption = function(type) {
+      selected = type;
+      if (type === 'delivery') {
+        document.getElementById('delivery').textContent = '●';
+        document.getElementById('pickup').textContent = '○';
+        document.getElementById('addressInput').style.display = 'block';
+      } else {
+        document.getElementById('delivery').textContent = '○';
+        document.getElementById('pickup').textContent = '●';
+        document.getElementById('addressInput').style.display = 'none';
+      }
+    }
+
+    window.placeOrder = async function() {
+      var address = document.getElementById('addressInput').value;
+
+      if (selected === 'delivery' && address === '') {
+        alert(window.currentLang === 'hi' ? 'पहले पता लिखो!' : 'Pehle address likho!');
+        return;
+      }
+
+      // Button disable karo
+      document.getElementById('placeBtn').textContent = 'Saving...';
+      document.getElementById('placeBtn').disabled = true;
+
+      // Firebase mein save karo
+      await saveOrder({
+        customerName: 'Customer',
+        items: 'Atta 1kg, Chawal 2kg',
+        total: 175,
+        address: address,
+        deliveryType: selected,
+        status: 'New',
+        time: new Date().toLocaleTimeString()
+      });
+
+      alert(window.currentLang === 'hi'
+        ? 'ऑर्डर हो गया! राजेश भाई को नोटिफिकेशन मिल गया 🎉'
+        : 'Order placed! Rajesh bhai ko notification mil gaya 🎉');
+
+      window.location.href = 'index.html';
+    }
+  </script>
+
+  <style>
+    .lang-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 6px;
+      z-index: 100;
+    }
+    .lang-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 0.5px solid #E8E6E0;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      background: white;
+      color: #8888AA;
+    }
+    .lang-btn.active {
+      background: #1A1A2E;
+      color: white;
+      border-color: #1A1A2E;
+    }
+    .address-input {
+      width: 100%;
+      padding: 10px;
+      border: 0.5px solid #E8E6E0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Segoe UI', sans-serif;
+      color: #1A1A2E;
+    }
+    .address-input:focus {
+      outline: none;
+      border-color: #1B7A45;
+    }
+    .option-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      cursor: pointer;
+    }
+    .option-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .option-icon { font-size: 24px; }
+    .option-title { font-size: 15px; font-weight: 600; }
+    .option-sub { font-size: 12px; color: #8888AA; margin-top: 2px; }
+    .radio { font-size: 18px; color: #1B7A45; font-weight: 700; }
+    .divider { height: 0.5px; background: #E8E6E0; margin: 10px 0; }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+    }
+    .summary-label { font-size: 14px; color: #4A4A6A; }
+    .summary-amount { font-size: 14px; color: #1A1A2E; }
+    .btn-order {
+      width: 100%;
+      padding: 16px;
+      background: #1B7A45;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .btn-order:hover { background: #155E36; }
+  </style>
+
+</body>
+</html>

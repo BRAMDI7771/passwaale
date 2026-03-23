@@ -1,0 +1,243 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PassWaale - Broadcast</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+    <button class="lang-btn" onclick="setLang('hi')" id="btn-hi">हि</button>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <h1 data-en="Broadcast" data-hi="ब्रॉडकास्ट">Broadcast</h1>
+    <p data-en="Send message to your customers"
+       data-hi="अपने ग्राहकों को संदेश भेजो">
+       Send message to your customers
+    </p>
+  </div>
+
+  <div class="orders-container">
+
+    <!-- Message Box -->
+    <div class="order-card">
+      <p class="customer-name" data-en="New Message" data-hi="नया संदेश">New Message</p>
+      
+      <textarea
+        id="messageBox"
+        data-en="Type here... e.g: Fresh paneer available today!"
+        data-hi="यहाँ लिखो... जैसे: आज ताज़ा पनीर आया है!"
+        placeholder="Type here... e.g: Fresh paneer available today!"
+        rows="4"
+      ></textarea>
+
+      <!-- Mic Button -->
+      <button class="btn-mic" id="micBtn" onclick="startVoice()">
+        🎤 <span id="micText" data-en="Tap to Speak" data-hi="बोलो">Tap to Speak</span>
+      </button>
+
+      <button class="btn-ready" onclick="sendMessage()"
+        data-en="Send to All" data-hi="सबको भेजो">
+        Send to All
+      </button>
+    </div>
+
+    <p class="section-title" data-en="Past Messages" data-hi="पिछले संदेश">Past Messages</p>
+
+    <div class="order-card">
+      <div class="order-top">
+        <span class="customer-name">Aaj fresh paneer aaya hai!</span>
+        <span class="badge ready" data-en="Sent" data-hi="भेजा">Sent</span>
+      </div>
+      <p class="time">Aaj, 9:00 AM</p>
+    </div>
+
+    <div class="order-card">
+      <div class="order-top">
+        <span class="customer-name">Kal shop band rahegi</span>
+        <span class="badge ready" data-en="Sent" data-hi="भेजा">Sent</span>
+      </div>
+      <p class="time">Kal, 6:00 PM</p>
+    </div>
+
+    <div id="sentMessages"></div>
+
+  </div>
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <span class="nav-icon">📋</span>
+      <span data-en="Orders" data-hi="ऑर्डर">Orders</span>
+    </a>
+    <a href="catalog.html" class="nav-item">
+      <span class="nav-icon">🛒</span>
+      <span data-en="Catalog" data-hi="कैटलॉग">Catalog</span>
+    </a>
+    <a href="broadcast.html" class="nav-item active">
+      <span class="nav-icon">📢</span>
+      <span data-en="Broadcast" data-hi="ब्रॉडकास्ट">Broadcast</span>
+    </a>
+    <a href="khata.html" class="nav-item">
+      <span class="nav-icon">💰</span>
+      <span data-en="Khata" data-hi="खाता">Khata</span>
+    </a>
+  </div>
+
+  <script src="lang.js"></script>
+  <script>
+    // Send Message
+    function sendMessage() {
+      var message = document.getElementById('messageBox').value;
+
+      if (message === '') {
+        alert(currentLang === 'hi' ? 'पहले कुछ लिखो!' : 'Pehle kuch likho!');
+        return;
+      }
+
+      var sentText = currentLang === 'hi' ? 'भेजा' : 'Sent';
+      var timeText = currentLang === 'hi' ? 'अभी' : 'Abhi';
+
+      var newCard = document.createElement('div');
+      newCard.className = 'order-card';
+      newCard.innerHTML =
+        '<div class="order-top">' +
+          '<span class="customer-name">' + message + '</span>' +
+          '<span class="badge ready">' + sentText + '</span>' +
+        '</div>' +
+        '<p class="time">' + timeText + '</p>';
+
+      document.getElementById('sentMessages').prepend(newCard);
+      document.getElementById('messageBox').value = '';
+    }
+
+    // Voice Typing
+    var recognition;
+
+    function startVoice() {
+      if (!('webkitSpeechRecognition' in window)) {
+        alert('Chrome use karo voice typing ke liye!');
+        return;
+      }
+
+      recognition = new webkitSpeechRecognition();
+      recognition.lang = currentLang === 'hi' ? 'hi-IN' : 'en-IN';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      recognition.onstart = function() {
+        document.getElementById('micBtn').style.background = '#FF4444';
+        document.getElementById('micBtn').style.color = 'white';
+        document.getElementById('micText').textContent =
+          currentLang === 'hi' ? 'सुन रहा हूँ...' : 'Listening...';
+      }
+
+      recognition.onresult = function(event) {
+        var transcript = event.results[0][0].transcript;
+        document.getElementById('messageBox').value = transcript;
+        document.getElementById('micBtn').style.background = '#1B7A45';
+        document.getElementById('micBtn').style.color = 'white';
+        document.getElementById('micText').textContent =
+          currentLang === 'hi' ? '✓ हो गया' : '✓ Done';
+
+        setTimeout(function() {
+          document.getElementById('micBtn').style.background = '';
+          document.getElementById('micBtn').style.color = '';
+          document.getElementById('micText').textContent =
+            currentLang === 'hi' ? 'बोलो' : 'Tap to Speak';
+        }, 2000);
+      }
+
+      recognition.onerror = function() {
+        document.getElementById('micBtn').style.background = '';
+        document.getElementById('micBtn').style.color = '';
+        document.getElementById('micText').textContent =
+          currentLang === 'hi' ? 'दोबारा कोशिश करो' : 'Try Again';
+      }
+
+      recognition.start();
+    }
+
+    // Language switch
+    var originalSetLang = setLang;
+    setLang = function(lang) {
+      originalSetLang(lang);
+      var textarea = document.getElementById('messageBox');
+      textarea.placeholder = textarea.getAttribute('data-' + lang);
+    }
+  </script>
+
+  <style>
+    .lang-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 6px;
+      z-index: 100;
+    }
+    .lang-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 0.5px solid #E8E6E0;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      background: white;
+      color: #8888AA;
+    }
+    .lang-btn.active {
+      background: #1A1A2E;
+      color: white;
+      border-color: #1A1A2E;
+    }
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 0.5px solid #E8E6E0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Segoe UI', sans-serif;
+      color: #1A1A2E;
+      margin: 10px 0;
+      resize: none;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: #FF6B00;
+    }
+    .btn-mic {
+      width: 100%;
+      padding: 10px;
+      background: #F5F5F5;
+      color: #1A1A2E;
+      border: 0.5px solid #E8E6E0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 8px;
+      transition: background 0.3s;
+    }
+    .btn-mic:hover {
+      background: #E8F5EE;
+      border-color: #1B7A45;
+    }
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #8888AA;
+      margin: 16px 0 8px 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  </style>
+
+</body>
+</html>

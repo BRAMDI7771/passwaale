@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PassWaale - Khata</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+    <button class="lang-btn" onclick="setLang('hi')" id="btn-hi">हि</button>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <h1 data-en="Khata" data-hi="खाता">Khata</h1>
+    <p data-en="Paid and Pending orders" data-hi="पेड और पेंडिंग ऑर्डर">Paid and Pending orders</p>
+  </div>
+
+  <div class="orders-container">
+
+    <!-- Summary -->
+    <div class="summary-row">
+      <div class="summary-card green">
+        <p class="summary-amount">₹1,240</p>
+        <p class="summary-label" data-en="Paid" data-hi="पेड">Paid</p>
+      </div>
+      <div class="summary-card orange">
+        <p class="summary-amount">₹340</p>
+        <p class="summary-label" data-en="Pending" data-hi="पेंडिंग">Pending</p>
+      </div>
+    </div>
+
+    <p class="section-title" data-en="Today's Orders" data-hi="आज के ऑर्डर">Today's Orders</p>
+
+    <!-- Order 1 -->
+    <div class="order-card">
+      <div class="order-top">
+        <span class="customer-name">Priya Sharma</span>
+        <span class="badge ready" id="pay1" data-en="Paid" data-hi="पेड">Paid</span>
+      </div>
+      <p class="items">Atta 1kg, Doodh 2L, Cheeni 500g</p>
+      <p class="time">₹138 • 10:32 AM</p>
+      <button class="btn-ready" id="paybtn1"
+        onclick="togglePay('pay1', 'paybtn1')"
+        data-en="Mark Pending" data-hi="पेंडिंग करो">
+        Mark Pending
+      </button>
+    </div>
+
+    <!-- Order 2 -->
+    <div class="order-card">
+      <div class="order-top">
+        <span class="customer-name">Rahul Verma</span>
+        <span class="badge new" id="pay2" data-en="Pending" data-hi="पेंडिंग">Pending</span>
+      </div>
+      <p class="items">Chawal 2kg, Namak 1kg</p>
+      <p class="time">₹220 • 9:45 AM</p>
+      <button class="btn-ready" id="paybtn2"
+        onclick="togglePay('pay2', 'paybtn2')"
+        data-en="Mark Paid" data-hi="पेड करो">
+        Mark Paid
+      </button>
+    </div>
+
+    <!-- Order 3 -->
+    <div class="order-card">
+      <div class="order-top">
+        <span class="customer-name">Sunita Devi</span>
+        <span class="badge new" id="pay3" data-en="Pending" data-hi="पेंडिंग">Pending</span>
+      </div>
+      <p class="items">Bread 1, Eggs 12</p>
+      <p class="time">₹120 • 8:15 AM</p>
+      <button class="btn-ready" id="paybtn3"
+        onclick="togglePay('pay3', 'paybtn3')"
+        data-en="Mark Paid" data-hi="पेड करो">
+        Mark Paid
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <span class="nav-icon">📋</span>
+      <span data-en="Orders" data-hi="ऑर्डर">Orders</span>
+    </a>
+    <a href="catalog.html" class="nav-item">
+      <span class="nav-icon">🛒</span>
+      <span data-en="Catalog" data-hi="कैटलॉग">Catalog</span>
+    </a>
+    <a href="broadcast.html" class="nav-item">
+      <span class="nav-icon">📢</span>
+      <span data-en="Broadcast" data-hi="ब्रॉडकास्ट">Broadcast</span>
+    </a>
+    <a href="khata.html" class="nav-item active">
+      <span class="nav-icon">💰</span>
+      <span data-en="Khata" data-hi="खाता">Khata</span>
+    </a>
+  </div>
+
+  <script src="lang.js"></script>
+  <script>
+    function togglePay(payId, btnId) {
+      var badge = document.getElementById(payId);
+      var button = document.getElementById(btnId);
+
+      if (badge.classList.contains('ready')) {
+        badge.textContent = currentLang === 'hi' ? 'पेंडिंग' : 'Pending';
+        badge.className = 'badge new';
+        button.textContent = currentLang === 'hi' ? 'पेड करो' : 'Mark Paid';
+      } else {
+        badge.textContent = currentLang === 'hi' ? 'पेड' : 'Paid';
+        badge.className = 'badge ready';
+        button.textContent = currentLang === 'hi' ? 'पेंडिंग करो' : 'Mark Pending';
+      }
+    }
+  </script>
+
+  <style>
+    .lang-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 6px;
+      z-index: 100;
+    }
+    .lang-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 0.5px solid #E8E6E0;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      background: white;
+      color: #8888AA;
+    }
+    .lang-btn.active {
+      background: #1A1A2E;
+      color: white;
+      border-color: #1A1A2E;
+    }
+  </style>
+
+</body>
+</html>

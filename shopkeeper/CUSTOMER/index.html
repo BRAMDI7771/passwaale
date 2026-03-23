@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rajesh Kirana</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+    <button class="lang-btn" onclick="setLang('hi')" id="btn-hi">हि</button>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <a href="index.html" class="back-btn" data-en="← Back" data-hi="← वापस">← Back</a>
+    <h1 data-en="Rajesh Kirana" data-hi="राजेश किराना">Rajesh Kirana</h1>
+    <p data-en="📍 120m away • Open" data-hi="📍 120 मीटर दूर • खुला">📍 120m away • Open</p>
+  </div>
+
+  <div class="container">
+
+    <p class="section-title" data-en="Available Items" data-hi="उपलब्ध आइटम">Available Items</p>
+
+    <!-- Item 1 -->
+    <div class="card item-card">
+      <div class="item-row">
+        <div class="item-info">
+          <p class="item-name" data-en="Atta 1kg" data-hi="आटा 1 किलो">Atta 1kg</p>
+          <p class="item-price">₹55</p>
+        </div>
+        <div class="item-right">
+          <span class="badge open" data-en="Available" data-hi="उपलब्ध">Available</span>
+          <button class="btn-add" id="addbtn1"
+            onclick="addToCart('Atta 1kg', 55, 'addbtn1')">
+            + Add
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="card item-card">
+      <div class="item-row">
+        <div class="item-info">
+          <p class="item-name" data-en="Doodh 1L" data-hi="दूध 1 लीटर">Doodh 1L</p>
+          <p class="item-price">₹28</p>
+        </div>
+        <div class="item-right">
+          <span class="badge closed" data-en="Out of Stock" data-hi="स्टॉक खत्म">Out of Stock</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="card item-card">
+      <div class="item-row">
+        <div class="item-info">
+          <p class="item-name" data-en="Chawal 2kg" data-hi="चावल 2 किलो">Chawal 2kg</p>
+          <p class="item-price">₹120</p>
+        </div>
+        <div class="item-right">
+          <span class="badge open" data-en="Available" data-hi="उपलब्ध">Available</span>
+          <button class="btn-add" id="addbtn2"
+            onclick="addToCart('Chawal 2kg', 120, 'addbtn2')">
+            + Add
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 4 -->
+    <div class="card item-card">
+      <div class="item-row">
+        <div class="item-info">
+          <p class="item-name" data-en="Cheeni 1kg" data-hi="चीनी 1 किलो">Cheeni 1kg</p>
+          <p class="item-price">₹45</p>
+        </div>
+        <div class="item-right">
+          <span class="badge open" data-en="Available" data-hi="उपलब्ध">Available</span>
+          <button class="btn-add" id="addbtn3"
+            onclick="addToCart('Cheeni 1kg', 45, 'addbtn3')">
+            + Add
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 5 -->
+    <div class="card item-card">
+      <div class="item-row">
+        <div class="item-info">
+          <p class="item-name" data-en="Namak 1kg" data-hi="नमक 1 किलो">Namak 1kg</p>
+          <p class="item-price">₹20</p>
+        </div>
+        <div class="item-right">
+          <span class="badge open" data-en="Available" data-hi="उपलब्ध">Available</span>
+          <button class="btn-add" id="addbtn4"
+            onclick="addToCart('Namak 1kg', 20, 'addbtn4')">
+            + Add
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Cart Bar -->
+  <div class="cart-bar" id="cartBar">
+    <div class="cart-info">
+      <span id="cartCount">0 items</span>
+      <span id="cartTotal">₹0</span>
+    </div>
+    <a href="order.html" class="cart-btn" id="cartBtn">Order Now →</a>
+  </div>
+
+  <script src="../lang.js"></script>
+  <script>
+    var cartItems = [];
+    var cartTotal = 0;
+
+    function addToCart(name, price, btnId) {
+      cartItems.push(name);
+      cartTotal += price;
+
+      var button = document.getElementById(btnId);
+      button.textContent = currentLang === 'hi' ? '✓ जोड़ा' : '✓ Added';
+      button.style.background = '#1B7A45';
+      button.disabled = true;
+
+      var countText = currentLang === 'hi' ? cartItems.length + ' आइटम' : cartItems.length + ' items';
+      document.getElementById('cartCount').textContent = countText;
+      document.getElementById('cartTotal').textContent = '₹' + cartTotal;
+      document.getElementById('cartBtn').textContent = currentLang === 'hi' ? 'ऑर्डर करो →' : 'Order Now →';
+      document.getElementById('cartBar').style.display = 'flex';
+    }
+
+    // Language switch hone pe cart text bhi update karo
+    var originalSetLang = setLang;
+    setLang = function(lang) {
+      originalSetLang(lang);
+
+      // Add buttons update karo
+      var addBtns = document.querySelectorAll('.btn-add:not(:disabled)');
+      addBtns.forEach(function(btn) {
+        btn.textContent = lang === 'hi' ? '+ जोड़ो' : '+ Add';
+      });
+
+      // Cart bar update karo agar visible hai
+      if (cartItems.length > 0) {
+        var countText = lang === 'hi' ? cartItems.length + ' आइटम' : cartItems.length + ' items';
+        document.getElementById('cartCount').textContent = countText;
+        document.getElementById('cartBtn').textContent = lang === 'hi' ? 'ऑर्डर करो →' : 'Order Now →';
+      }
+    }
+  </script>
+
+  <style>
+    .lang-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 6px;
+      z-index: 100;
+    }
+    .lang-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 0.5px solid #E8E6E0;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      background: white;
+      color: #8888AA;
+    }
+    .lang-btn.active {
+      background: #1A1A2E;
+      color: white;
+      border-color: #1A1A2E;
+    }
+  </style>
+
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rajesh Kirana</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 0.5px solid #E8E6E0;
+      display: flex;
+      flex-direction: column;
+      z-index: 9999;
+    }
+    .nav-links {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+    .cart-bar {
+      display: none;
+      width: 100%;
+      background: #1B7A45;
+      padding: 12px 16px;
+      flex-direction: column;
+    }
+    .cart-btn {
+      background: white;
+      color: #1B7A45;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .lang-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 6px;
+      z-index: 10000;
+    }
+    .lang-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 0.5px solid #E8E6E0;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      background: white;
+      color: #8888AA;
+    }
+    .lang-btn.active {
+      background: #1A1A2E;
+      color: white;
+      border-color: #1A1A2E;
+    }
+    .qty-selector {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid #1B7A45;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .qty-btn {
+      width: 30px;
+      height: 30px;
+      background: #1B7A45;
+      color: white;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .qty-num {
+      width: 30px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1B7A45;
+    }
+    .cart-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+    <button class="lang-btn" onclick="setLang('hi')" id="btn-hi">हि</button>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <a href="index.html" class="back-btn"
+      data-en="← Back" data-hi="← वापस">← Back</a>
+    <h1 data-en="Rajesh Kirana" data-hi="राजेश किराना">Rajesh Kirana</h1>
+    <p data-en="📍 120m away • Open"
+      data-hi="📍 120 मीटर दूर • खुला">📍 120m away • Open</p>
+  </div>
+
+  <div class="container" style="padding-bottom: 250px;">
+
+    <p class="section-title"
+      data-en="Available Items"
+      data-hi="उपलब्ध आइटम">Available Items</p>
+
+    <!-- Item 1 -->
+    <div class="card item-card">
+      <div class="item-row">
+        <div class="item-info">
+          <p class="item-name" data-en="Atta 1kg" data-hi="आटा 1 किलो">Atta 1kg</p>
+          <p class="item-price">₹55</p>
+        </div>
+        <div class="item-right" id="right-atta">
+          <span class="badge open" data-en="Available" data-hi="उपलब्ध">Available</span>
+          <button class="btn-add" id="addbtn1"
+            onclick="addToCart('Atta 1kg', 55, 'addbtn1', 'right-atta')">+ Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="card item-card">
+      <div class="item-row">
+        <div class="item-info">
+          <p class="item-name" data-en="Doodh 1L" data-hi="दूध 1 लीटर">Doodh 1L</p>
+          <p class="item-price">₹28</p>
+        </div>
+        <div class="item-right">
+          <span class="badge closed"
+            data-en="Out of Stock"
+            data-hi="स्टॉक खत्म">Out of Stock</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="card item-card">
+      <div class="item-row">
+        <div class="item-info">
+          <p class="item-name" data-en="Chawal 2kg" data-hi="चावल 2 किलो">Chawal 2kg</p>
+          <p class="item-price">₹120</p>
+        </div>
+        <div class="item-right" id="right-chawal">
+          <span class="badge open" data-en="Available" data-hi="उपलब्ध">Available</span>
+          <button class="btn-add" id="addbtn2"
+            onclick="addToCart('Chawal 2kg', 120, 'addbtn2', 'right-chawal')">+ Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 4 -->
+    <div class="card item-card">
+      <div class="item-row">
+        <div class="item-info">
+          <p class="item-name" data-en="Cheeni 1kg" data-hi="चीनी 1 किलो">Cheeni 1kg</p>
+          <p class="item-price">₹45</p>
+        </div>
+        <div class="item-right" id="right-cheeni">
+          <span class="badge open" data-en="Available" data-hi="उपलब्ध">Available</span>
+          <button class="btn-add" id="addbtn3"
+            onclick="addToCart('Cheeni 1kg', 45, 'addbtn3', 'right-cheeni')">+ Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 5 -->
+    <div class="card item-card">
+      <div class="item-row">
+        <div class="item-info">
+          <p class="item-name" data-en="Namak 1kg" data-hi="नमक 1 किलो">Namak 1kg</p>
+          <p class="item-price">₹20</p>
+        </div>
+        <div class="item-right" id="right-namak">
+          <span class="badge open" data-en="Available" data-hi="उपलब्ध">Available</span>
+          <button class="btn-add" id="addbtn4"
+            onclick="addToCart('Namak 1kg', 20, 'addbtn4', 'right-namak')">+ Add</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+
+    <!-- Cart Bar -->
+    <div class="cart-bar" id="cartBar">
+      <div id="cartItemsList"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;border-top:0.5px solid rgba(255,255,255,0.3);padding-top:6px;">
+        <div>
+          <div id="cartCount" style="font-size:12px;color:white;">0 items</div>
+          <div id="cartTotal" style="font-size:16px;font-weight:700;color:white;">₹0</div>
+        </div>
+      </div>
+      <a href="order.html" class="cart-btn" id="cartBtn">Order Now →</a>
+    </div>
+
+    <!-- Nav Links -->
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">
+        <span class="nav-icon">🏪</span>
+        <span data-en="Shops" data-hi="दुकानें">Shops</span>
+      </a>
+      <a href="orders.html" class="nav-item">
+        <span class="nav-icon">📋</span>
+        <span data-en="My Orders" data-hi="मेरे ऑर्डर">My Orders</span>
+      </a>
+    </div>
+
+  </div>
+
+  <script src="../lang.js"></script>
+  <script>
+    var cart = {};
+
+    function addToCart(name, price, btnId, rightId) {
+      cart[name] = {name: name, price: price, qty: 1, btnId: btnId, rightId: rightId};
+
+      var rightDiv = document.getElementById(rightId);
+      rightDiv.innerHTML =
+        '<div class="qty-selector">' +
+          '<button class="qty-btn" onclick="changeQty(\'' + name + '\', -1)">−</button>' +
+          '<span class="qty-num" id="qty-' + name.replace(/ /g,'_') + '">1</span>' +
+          '<button class="qty-btn" onclick="changeQty(\'' + name + '\', 1)">+</button>' +
+        '</div>';
+
+      updateCartBar();
+      saveCart();
+    }
+
+    function changeQty(name, change) {
+      if (!cart[name]) return;
+      cart[name].qty += change;
+
+      if (cart[name].qty <= 0) {
+        var item = cart[name];
+        var rightDiv = document.getElementById(item.rightId);
+        rightDiv.innerHTML =
+          '<span class="badge open">Available</span>' +
+          '<button class="btn-add" onclick="addToCart(\'' + name + '\', ' + item.price + ', \'' + item.btnId + '\', \'' + item.rightId + '\')">+ Add</button>';
+        delete cart[name];
+      } else {
+        document.getElementById('qty-' + name.replace(/ /g,'_')).textContent = cart[name].qty;
+      }
+
+      updateCartBar();
+      saveCart();
+    }
+
+    function updateCartBar() {
+      var keys = Object.keys(cart);
+
+      if (keys.length === 0) {
+        document.getElementById('cartBar').style.display = 'none';
+        return;
+      }
+
+      var total = 0;
+      var totalItems = 0;
+      var html = '';
+
+      keys.forEach(function(name) {
+        var item = cart[name];
+        var itemTotal = item.price * item.qty;
+        total += itemTotal;
+        totalItems += item.qty;
+
+        html +=
+          '<div class="cart-item-row">' +
+            '<span style="color:white;font-size:12px;flex:1;">' + item.name + ' x' + item.qty + '</span>' +
+            '<span style="color:white;font-size:12px;">₹' + itemTotal + '</span>' +
+          '</div>';
+      });
+
+      document.getElementById('cartItemsList').innerHTML = html;
+      document.getElementById('cartCount').textContent = totalItems + ' items';
+      document.getElementById('cartTotal').textContent = '₹' + total;
+      document.getElementById('cartBtn').textContent =
+        currentLang === 'hi' ? 'ऑर्डर करो →' : 'Order Now →';
+      document.getElementById('cartBar').style.display = 'flex';
+    }
+
+    function saveCart() {
+      var cartItems = [];
+      var cartTotal = 0;
+      Object.keys(cart).forEach(function(name) {
+        var item = cart[name];
+        cartItems.push({
+          name: item.name + ' x' + item.qty,
+          price: item.price * item.qty
+        });
+        cartTotal += item.price * item.qty;
+      });
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      localStorage.setItem('cartTotal', cartTotal);
+    }
+  </script>
+
+</body>
+</html>

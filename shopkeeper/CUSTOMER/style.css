@@ -1,0 +1,352 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #F5F5F5;
+  color: #1A1A2E;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  background-color: #1B7A45;
+  padding: 20px;
+  color: white;
+}
+
+.header h1 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.header p {
+  font-size: 14px;
+  margin-top: 4px;
+  opacity: 0.85;
+}
+
+/* Container */
+.container {
+  padding: 16px; 
+  padding-bottom: 80px;
+
+   
+}
+/* Cards */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 0.5px solid #E8E6E0;
+}
+
+/* Bottom Nav */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: white;
+  border-top: 0.5px solid #E8E6E0;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  z-index: 9999;
+}
+
+
+.nav-item {
+  text-decoration: none;
+  text-align: center;
+  font-size: 11px;
+  color: #8888AA;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-item.active {
+  color: #1B7A45;
+}
+
+.nav-icon {
+  font-size: 20px;
+}
+
+/* Section Title */
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #8888AA;
+  margin: 0 0 10px 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Shop Card */
+.shop-card {
+  text-decoration: none;
+  color: #1A1A2E;
+  display: block;
+}
+
+.shop-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.shop-icon {
+  font-size: 28px;
+  width: 44px;
+  height: 44px;
+  background: #F5F5F5;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shop-info {
+  flex: 1;
+}
+
+.shop-name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.shop-meta {
+  font-size: 12px;
+  color: #8888AA;
+  margin-top: 2px;
+}
+
+.shop-items {
+  font-size: 12px;
+  color: #8888AA;
+  padding-left: 56px;
+}
+
+/* Badges */
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.badge.open {
+  background-color: #E8F5EE;
+  color: #1B7A45;
+}
+
+.badge.closed {
+  background-color: #F0F0F0;
+  color: #8888AA;
+}
+
+/* Bottom nav padding */
+.container {
+  padding: 16px;
+  padding-bottom: 80px;
+}
+
+
+/* Back Button */
+.back-btn {
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  opacity: 0.85;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Item Card */
+.item-card {
+  margin-bottom: 10px;
+}
+
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.item-price {
+  font-size: 13px;
+  color: #1B7A45;
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+.item-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+/* Add Button */
+.btn-add {
+  padding: 6px 14px;
+  background: #1B7A45;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Cart Bar */
+.cart-bar {
+  position: fixed;
+  bottom: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 400px;
+  background: #1B7A45;
+  padding: 14px 20px;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 998;
+}
+
+.cart-info {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-size: 13px;
+  gap: 2px;
+}
+
+#cartTotal {
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+}
+
+.cart-btn {
+  background: white;
+  color: #1B7A45;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+
+/* Option Row */
+.option-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.option-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.option-icon {
+  font-size: 24px;
+}
+
+.option-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.option-sub {
+  font-size: 12px;
+  color: #8888AA;
+  margin-top: 2px;
+}
+
+.radio {
+  font-size: 18px;
+  color: #1B7A45;
+  font-weight: 700;
+}
+
+/* Divider */
+.divider {
+  height: 0.5px;
+  background: #E8E6E0;
+  margin: 10px 0;
+}
+
+/* Address Input */
+.address-input {
+  width: 100%;
+  padding: 10px;
+  border: 0.5px solid #E8E6E0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #1A1A2E;
+}
+
+.address-input:focus {
+  outline: none;
+  border-color: #1B7A45;
+}
+
+/* Summary Row */
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+}
+
+.summary-label {
+  font-size: 14px;
+  color: #4A4A6A;
+}
+
+.summary-amount {
+  font-size: 14px;
+  color: #1A1A2E;
+}
+
+/* Order Button */
+.btn-order {
+  width: 100%;
+  padding: 16px;
+  background: #1B7A45;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.btn-order:hover {
+  background: #155E36;
+}

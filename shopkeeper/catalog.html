@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PassWaale - Catalog</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+    <button class="lang-btn" onclick="setLang('hi')" id="btn-hi">हि</button>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <h1 data-en="My Catalog" data-hi="मेरा कैटलॉग">My Catalog</h1>
+    <p data-en="Mark items available/unavailable" 
+       data-hi="आइटम उपलब्ध/अनुपलब्ध करो">
+       Mark items available/unavailable
+    </p>
+  </div>
+
+  <div class="orders-container">
+
+    <!-- Item 1 -->
+    <div class="order-card">
+      <div class="order-top">
+        <span class="customer-name">Atta 1kg</span>
+        <span class="badge ready" id="item1" 
+          data-en="Available" data-hi="उपलब्ध">Available</span>
+      </div>
+      <p class="items">Aashirvaad | ₹55</p>
+      <button class="btn-ready" id="itmbtn1" 
+        onclick="toggleItem('item1', 'itmbtn1')"
+        data-en="Mark Out of Stock" data-hi="स्टॉक खत्म करो">
+        Mark Out of Stock
+      </button>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="order-card">
+      <div class="order-top">
+        <span class="customer-name">Doodh 1L</span>
+        <span class="badge new" id="item2"
+          data-en="Out of Stock" data-hi="स्टॉक खत्म">Out of Stock</span>
+      </div>
+      <p class="items">Amul | ₹28</p>
+      <button class="btn-ready" id="itmbtn2"
+        onclick="toggleItem('item2', 'itmbtn2')"
+        data-en="Mark Available" data-hi="उपलब्ध करो">
+        Mark Available
+      </button>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="order-card">
+      <div class="order-top">
+        <span class="customer-name">Chawal 2kg</span>
+        <span class="badge ready" id="item3"
+          data-en="Available" data-hi="उपलब्ध">Available</span>
+      </div>
+      <p class="items">India Gate | ₹120</p>
+      <button class="btn-ready" id="itmbtn3"
+        onclick="toggleItem('item3', 'itmbtn3')"
+        data-en="Mark Out of Stock" data-hi="स्टॉक खत्म करो">
+        Mark Out of Stock
+      </button>
+    </div>
+
+    <!-- Item 4 -->
+    <div class="order-card">
+      <div class="order-top">
+        <span class="customer-name">Cheeni 1kg</span>
+        <span class="badge ready" id="item4"
+          data-en="Available" data-hi="उपलब्ध">Available</span>
+      </div>
+      <p class="items">Generic | ₹45</p>
+      <button class="btn-ready" id="itmbtn4"
+        onclick="toggleItem('item4', 'itmbtn4')"
+        data-en="Mark Out of Stock" data-hi="स्टॉक खत्म करो">
+        Mark Out of Stock
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <span class="nav-icon">📋</span>
+      <span data-en="Orders" data-hi="ऑर्डर">Orders</span>
+    </a>
+    <a href="catalog.html" class="nav-item active">
+      <span class="nav-icon">🛒</span>
+      <span data-en="Catalog" data-hi="कैटलॉग">Catalog</span>
+    </a>
+    <a href="broadcast.html" class="nav-item">
+      <span class="nav-icon">📢</span>
+      <span data-en="Broadcast" data-hi="ब्रॉडकास्ट">Broadcast</span>
+    </a>
+    <a href="khata.html" class="nav-item">
+      <span class="nav-icon">💰</span>
+      <span data-en="Khata" data-hi="खाता">Khata</span>
+    </a>
+  </div>
+
+  <script src="language(exterior).js"></script>
+  <script>
+    function toggleItem(itemId, btnId) {
+      var badge = document.getElementById(itemId);
+      var button = document.getElementById(btnId);
+
+      if (badge.classList.contains('ready')) {
+        badge.textContent = currentLang === 'hi' ? 'स्टॉक खत्म' : 'Out of Stock';
+        badge.className = 'badge new';
+        button.textContent = currentLang === 'hi' ? 'उपलब्ध करो' : 'Mark Available';
+        button.setAttribute('data-en', 'Mark Available');
+        button.setAttribute('data-hi', 'उपलब्ध करो');
+      } else {
+        badge.textContent = currentLang === 'hi' ? 'उपलब्ध' : 'Available';
+        badge.className = 'badge ready';
+        button.textContent = currentLang === 'hi' ? 'स्टॉक खत्म करो' : 'Mark Out of Stock';
+        button.setAttribute('data-en', 'Mark Out of Stock');
+        button.setAttribute('data-hi', 'स्टॉक खत्म करो');
+      }
+    }
+  </script>
+
+  <style>
+    .lang-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 6px;
+      z-index: 100;
+    }
+    .lang-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 0.5px solid #E8E6E0;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      background: white;
+      color: #8888AA;
+    }
+    .lang-btn.active {
+      background: #1A1A2E;
+      color: white;
+      border-color: #1A1A2E;
+    }
+  </style>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PassWaale - Shopkeeper</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+    <button class="lang-btn" onclick="setLang('hi')" id="btn-hi">हि</button>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <h1 data-en="Rajesh Kirana" data-hi="राजेश किराना">Rajesh Kirana</h1>
+    <p data-en="Today's Orders" data-hi="आज के ऑर्डर">Today's Orders</p>
+  </div>
+
+  <div class="orders-container" id="ordersContainer">
+    <!-- Firebase se orders yahan aayenge -->
+    <p class="loading-text">Orders load ho rahe hain...</p>
+  </div>
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <a href="index.html" class="nav-item active">
+      <span class="nav-icon">📋</span>
+      <span data-en="Orders" data-hi="ऑर्डर">Orders</span>
+    </a>
+    <a href="catalog.html" class="nav-item">
+      <span class="nav-icon">🛒</span>
+      <span data-en="Catalog" data-hi="कैटलॉग">Catalog</span>
+    </a>
+    <a href="broadcast.html" class="nav-item">
+      <span class="nav-icon">📢</span>
+      <span data-en="Broadcast" data-hi="ब्रॉडकास्ट">Broadcast</span>
+    </a>
+    <a href="khata.html" class="nav-item">
+      <span class="nav-icon">💰</span>
+      <span data-en="Khata" data-hi="खाता">Khata</span>
+    </a>
+  </div>
+
+  <script src="lang.js"></script>
+
+  <script type="module">
+    import { getOrders, updateOrderStatus } from './firebase.js';
+
+    // Real-time orders load karo
+    getOrders(function(orders) {
+      var container = document.getElementById('ordersContainer');
+
+      if (orders.length === 0) {
+        container.innerHTML = '<p class="loading-text">Koi order nahi abhi!</p>';
+        return;
+      }
+
+      container.innerHTML = '';
+
+      orders.forEach(function(order) {
+        var badgeClass = order.status === 'Delivered' ? 'delivered' : 
+                         order.status === 'Ready' ? 'ready' : 'new';
+
+        var card = document.createElement('div');
+        card.className = 'order-card';
+        card.innerHTML =
+          '<div class="order-top">' +
+            '<span class="customer-name">' + order.customerName + '</span>' +
+            '<span class="badge ' + badgeClass + '" id="badge-' + order.id + '">' + 
+              order.status + 
+            '</span>' +
+          '</div>' +
+          '<p class="items">' + order.items + '</p>' +
+          '<p class="time">₹' + order.total + ' • ' + order.time + '</p>' +
+          '<button class="btn-ready" onclick="markReady(\'' + order.id + '\')">' +
+            'Mark as Ready' +
+          '</button>';
+
+        container.appendChild(card);
+      });
+    });
+
+    // Global function
+    window.markReady = async function(orderId) {
+  // Firebase mein status update karo
+  await updateOrderStatus(orderId, 'Ready');
+  
+  // UI update karo
+  var badge = document.getElementById('badge-' + orderId);
+  badge.textContent = 'Ready';
+  badge.className = 'badge ready';
+  event.target.style.display = 'none';
+}
+  </script>
+
+  <style>
+    .lang-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 6px;
+      z-index: 100;
+    }
+    .lang-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 0.5px solid #E8E6E0;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      background: white;
+      color: #8888AA;
+    }
+    .lang-btn.active {
+      background: #1A1A2E;
+      color: white;
+      border-color: #1A1A2E;
+    }
+    .loading-text {
+      text-align: center;
+      color: #8888AA;
+      font-size: 14px;
+      padding: 40px 20px;
+    }
+  </style>
+
+</body>
+</html>

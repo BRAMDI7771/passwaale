@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PassWaale</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #F5F5F5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .logo { font-size: 48px; margin-bottom: 8px; }
+    .app-name {
+      font-size: 32px;
+      font-weight: 800;
+      color: #1A1A2E;
+      margin-bottom: 6px;
+    }
+    .tagline {
+      font-size: 14px;
+      color: #8888AA;
+      text-align: center;
+      margin-bottom: 40px;
+      line-height: 1.5;
+    }
+    .question {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1A1A2E;
+      margin-bottom: 16px;
+    }
+    .btn {
+      width: 100%;
+      max-width: 320px;
+      padding: 18px 20px;
+      border: none;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-bottom: 12px;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      color: white;
+    }
+    .btn-shopkeeper {
+      background: #FF6B00;
+    }
+    .btn-shopkeeper:hover { background: #E05A00; }
+    .btn-customer {
+      background: #1B7A45;
+    }
+    .btn-customer:hover { background: #155E36; }
+    .btn-sub {
+      font-size: 12px;
+      opacity: 0.85;
+      margin-top: 4px;
+      font-weight: 400;
+    }
+    .footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #BBBBCC;
+      text-align: center;
+    }
+    .lang-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 6px;
+      z-index: 100;
+    }
+    .lang-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 0.5px solid #E8E6E0;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      background: white;
+      color: #8888AA;
+    }
+    .lang-btn.active {
+      background: #1A1A2E;
+      color: white;
+      border-color: #1A1A2E;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+    <button class="lang-btn" onclick="setLang('hi')" id="btn-hi">हि</button>
+  </div>
+
+  <!-- Logo -->
+  <div class="logo">🏪</div>
+  <h1 class="app-name">PassWaale</h1>
+  <p class="tagline" id="tagline">
+    Aapke paas ki dukaan,<br>ab online available!
+  </p>
+
+  <!-- Buttons -->
+  <p class="question" id="question">Aap kaun hain?</p>
+
+  <a href="shopkeeper.html" class="btn btn-shopkeeper">
+    🧑‍💼 <span id="shop-title">Main Shopkeeper Hoon</span>
+    <div class="btn-sub" id="shop-sub">Orders, Catalog, Khata manage karo</div>
+  </a>
+
+  <a href="CUSTOMER/index.html" class="btn btn-customer">
+    🛒 <span id="cust-title">Main Customer Hoon</span>
+    <div class="btn-sub" id="cust-sub">Paas ki dukaan se order karo</div>
+  </a>
+
+  <p class="footer" id="footer">Local shops ko digital banao 🇮🇳</p>
+
+  <script src="lang.js"></script>
+  <script>
+    var content = {
+      en: {
+        tagline: 'Aapke paas ki dukaan,<br>ab online available!',
+        question: 'Aap kaun hain?',
+        shopTitle: 'Main Shopkeeper Hoon',
+        shopSub: 'Orders, Catalog, Khata manage karo',
+        custTitle: 'Main Customer Hoon',
+        custSub: 'Paas ki dukaan se order karo',
+        footer: 'Local shops ko digital banao 🇮🇳'
+      },
+      hi: {
+        tagline: 'आपके पास की दुकान,<br>अब ऑनलाइन उपलब्ध!',
+        question: 'आप कौन हैं?',
+        shopTitle: 'मैं दुकानदार हूँ',
+        shopSub: 'ऑर्डर, कैटलॉग, खाता मैनेज करो',
+        custTitle: 'मैं ग्राहक हूँ',
+        custSub: 'पास की दुकान से ऑर्डर करो',
+        footer: 'लोकल दुकानों को डिजिटल बनाओ 🇮🇳'
+      }
+    };
+
+    function setLang(lang) {
+      var c = content[lang];
+      document.getElementById('tagline').innerHTML = c.tagline;
+      document.getElementById('question').textContent = c.question;
+      document.getElementById('shop-title').textContent = c.shopTitle;
+      document.getElementById('shop-sub').textContent = c.shopSub;
+      document.getElementById('cust-title').textContent = c.custTitle;
+      document.getElementById('cust-sub').textContent = c.custSub;
+      document.getElementById('footer').textContent = c.footer;
+      document.getElementById('btn-en').classList.remove('active');
+      document.getElementById('btn-hi').classList.remove('active');
+      document.getElementById('btn-' + lang).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>

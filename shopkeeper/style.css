@@ -1,0 +1,217 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #F5F5F5;
+  color: #1A1A2E;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  background-color: #FF6B00;
+  padding: 20px;
+  color: white;
+}
+
+.header h1 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.header p {
+  font-size: 14px;
+  margin-top: 4px;
+  opacity: 0.85;
+}
+
+/* Orders Container */
+.orders-container {
+  padding: 16px;
+}
+/* Order Card */
+.order-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 0.5px solid #E8E6E0;
+}
+
+/* Card Top Row */
+.order-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* Customer Name */
+.customer-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1A1A2E;
+}
+
+/* Items Text */
+.items {
+  font-size: 13px;
+  color: #8888AA;
+  margin-bottom: 6px;
+}
+
+/* Time Text */
+.time {
+  font-size: 12px;
+  color: #BBBBCC;
+}
+
+/* Badges */
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.badge.new {
+  background-color: #FFF0E5;
+  color: #FF6B00;
+}
+
+.badge.ready {
+  background-color: #E8F5EE;
+  color: #1B7A45;
+}
+
+.badge.delivered {
+  background-color: #F0F0F0;
+  color: #8888AA;
+}
+/* Ready Button */
+.btn-ready {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #FF6B00;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-ready:hover {
+  background-color: #E05A00;
+}
+
+/* Textarea */
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 0.5px solid #E8E6E0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #1A1A2E;
+  margin: 10px 0;
+  resize: none;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #FF6B00;
+}
+
+/* Section Title */
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #8888AA;
+  margin: 16px 0 8px 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Summary Row */
+.summary-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* Summary Card */
+.summary-card {
+  flex: 1;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.summary-card.green {
+  background-color: #E8F5EE;
+}
+
+.summary-card.orange {
+  background-color: #FFF0E5;
+}
+
+.summary-amount {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.summary-card.green .summary-amount {
+  color: #1B7A45;
+}
+
+.summary-card.orange .summary-amount {
+  color: #FF6B00;
+}
+
+.summary-label {
+  font-size: 12px;
+  color: #8888AA;
+  margin-top: 4px;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-top: 0.5px solid #E8E6E0;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+.nav-item {
+  text-decoration: none;
+  text-align: center;
+  font-size: 11px;
+  color: #8888AA;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-item.active {
+  color: #FF6B00;
+}
+
+.nav-icon {
+  font-size: 20px;
+}
