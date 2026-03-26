@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <title>Rajesh Kirana</title>
   <link rel="stylesheet" href="style.css">
   <style>
@@ -73,12 +74,12 @@
       overflow: hidden;
     }
     .qty-btn {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       background: #1B7A45;
       color: white;
       border: none;
-      font-size: 18px;
+      font-size: 20px;
       cursor: pointer;
       font-weight: 700;
       display: flex;
@@ -86,17 +87,42 @@
       justify-content: center;
     }
     .qty-num {
-      width: 30px;
+      width: 32px;
       text-align: center;
       font-size: 14px;
       font-weight: 700;
       color: #1B7A45;
+      background: white;
     }
     .cart-item-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 3px 0;
+    }
+    .item-card { margin-bottom: 10px; }
+    .item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .item-name { font-size: 15px; font-weight: 600; color: #1A1A2E; }
+    .item-price { font-size: 13px; color: #1B7A45; font-weight: 600; margin-top: 3px; }
+    .item-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+    .btn-add {
+      padding: 6px 14px;
+      background: #1B7A45;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -127,13 +153,13 @@
     <div class="card item-card">
       <div class="item-row">
         <div class="item-info">
-          <p class="item-name" data-en="Atta 1kg" data-hi="आटा 1 किलो">Atta 1kg</p>
+          <p class="item-name">Atta 1kg</p>
           <p class="item-price">₹55</p>
         </div>
         <div class="item-right" id="right-atta">
-          <span class="badge open" data-en="Available" data-hi="उपलब्ध">Available</span>
-          <button class="btn-add" id="addbtn1"
-            onclick="addToCart('Atta 1kg', 55, 'addbtn1', 'right-atta')">+ Add</button>
+          <span class="badge open">Available</span>
+          <button class="btn-add"
+            onclick="addToCart('Atta 1kg', 55, 'right-atta')">+ Add</button>
         </div>
       </div>
     </div>
@@ -142,13 +168,11 @@
     <div class="card item-card">
       <div class="item-row">
         <div class="item-info">
-          <p class="item-name" data-en="Doodh 1L" data-hi="दूध 1 लीटर">Doodh 1L</p>
+          <p class="item-name">Doodh 1L</p>
           <p class="item-price">₹28</p>
         </div>
         <div class="item-right">
-          <span class="badge closed"
-            data-en="Out of Stock"
-            data-hi="स्टॉक खत्म">Out of Stock</span>
+          <span class="badge closed">Out of Stock</span>
         </div>
       </div>
     </div>
@@ -157,13 +181,13 @@
     <div class="card item-card">
       <div class="item-row">
         <div class="item-info">
-          <p class="item-name" data-en="Chawal 2kg" data-hi="चावल 2 किलो">Chawal 2kg</p>
+          <p class="item-name">Chawal 2kg</p>
           <p class="item-price">₹120</p>
         </div>
         <div class="item-right" id="right-chawal">
-          <span class="badge open" data-en="Available" data-hi="उपलब्ध">Available</span>
-          <button class="btn-add" id="addbtn2"
-            onclick="addToCart('Chawal 2kg', 120, 'addbtn2', 'right-chawal')">+ Add</button>
+          <span class="badge open">Available</span>
+          <button class="btn-add"
+            onclick="addToCart('Chawal 2kg', 120, 'right-chawal')">+ Add</button>
         </div>
       </div>
     </div>
@@ -172,13 +196,13 @@
     <div class="card item-card">
       <div class="item-row">
         <div class="item-info">
-          <p class="item-name" data-en="Cheeni 1kg" data-hi="चीनी 1 किलो">Cheeni 1kg</p>
+          <p class="item-name">Cheeni 1kg</p>
           <p class="item-price">₹45</p>
         </div>
         <div class="item-right" id="right-cheeni">
-          <span class="badge open" data-en="Available" data-hi="उपलब्ध">Available</span>
-          <button class="btn-add" id="addbtn3"
-            onclick="addToCart('Cheeni 1kg', 45, 'addbtn3', 'right-cheeni')">+ Add</button>
+          <span class="badge open">Available</span>
+          <button class="btn-add"
+            onclick="addToCart('Cheeni 1kg', 45, 'right-cheeni')">+ Add</button>
         </div>
       </div>
     </div>
@@ -187,13 +211,13 @@
     <div class="card item-card">
       <div class="item-row">
         <div class="item-info">
-          <p class="item-name" data-en="Namak 1kg" data-hi="नमक 1 किलो">Namak 1kg</p>
+          <p class="item-name">Namak 1kg</p>
           <p class="item-price">₹20</p>
         </div>
         <div class="item-right" id="right-namak">
-          <span class="badge open" data-en="Available" data-hi="उपलब्ध">Available</span>
-          <button class="btn-add" id="addbtn4"
-            onclick="addToCart('Namak 1kg', 20, 'addbtn4', 'right-namak')">+ Add</button>
+          <span class="badge open">Available</span>
+          <button class="btn-add"
+            onclick="addToCart('Namak 1kg', 20, 'right-namak')">+ Add</button>
         </div>
       </div>
     </div>
@@ -233,8 +257,8 @@
   <script>
     var cart = {};
 
-    function addToCart(name, price, btnId, rightId) {
-      cart[name] = {name: name, price: price, qty: 1, btnId: btnId, rightId: rightId};
+    function addToCart(name, price, rightId) {
+      cart[name] = {name: name, price: price, qty: 1, rightId: rightId};
 
       var rightDiv = document.getElementById(rightId);
       rightDiv.innerHTML =
@@ -257,7 +281,7 @@
         var rightDiv = document.getElementById(item.rightId);
         rightDiv.innerHTML =
           '<span class="badge open">Available</span>' +
-          '<button class="btn-add" onclick="addToCart(\'' + name + '\', ' + item.price + ', \'' + item.btnId + '\', \'' + item.rightId + '\')">+ Add</button>';
+          '<button class="btn-add" onclick="addToCart(\'' + name + '\', ' + item.price + ', \'' + item.rightId + '\')">+ Add</button>';
         delete cart[name];
       } else {
         document.getElementById('qty-' + name.replace(/ /g,'_')).textContent = cart[name].qty;
@@ -296,7 +320,7 @@
       document.getElementById('cartCount').textContent = totalItems + ' items';
       document.getElementById('cartTotal').textContent = '₹' + total;
       document.getElementById('cartBtn').textContent =
-        currentLang === 'hi' ? 'ऑर्डर करो →' : 'Order Now →';
+        typeof currentLang !== 'undefined' && currentLang === 'hi' ? 'ऑर्डर करो →' : 'Order Now →';
       document.getElementById('cartBar').style.display = 'flex';
     }
 
