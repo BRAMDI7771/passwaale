@@ -3,186 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rajesh Kirana</title>
+  <title>PassWaale - Customer</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* 1. Bottom Nav Fix (Layout theek karne ke liye) */
+   .bottom-nav {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    background: white !important;
+    border-top: 1px solid #ddd !important;
+    padding: 8px 0 !important;
+    z-index: 99999 !important;
+}
+
+.nav-links {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-around !important; /* Ye icons ke beech gap banayega */
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 600px; /* Mobile screen ke liye best hai */
+    margin: 0 auto !important;
+}
+
+.nav-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    color: #888 !important;
+    flex: 1 !important; /* Har icon ko barabar jagah dega */
+    cursor: pointer !important;
+}
+
+.nav-item.active {
+    color: #1B7A45 !important;
+    font-weight: bold !important;
+}
+
+.nav-icon {
+    font-size: 22px !important;
+    margin-bottom: 2px !important;
+}
+
+.nav-item span[data-en] {
+    font-size: 11px !important;
+}
+
+    
+
+    /* 2. Profile & Khata Section Styling */
+    #profile-section { display: none; padding: 20px 0; }
+    .profile-card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      border: 1px solid #E8E6E0;
+      margin-bottom: 20px;
+    }
+    .profile-avatar {
+      font-size: 50px;
+      background: #f0f0f0;
+      width: 80px; height: 80px;
+      line-height: 80px;
+      border-radius: 50%;
+      margin: 0 auto 10px;
+    }
+    .khata-card {
+      background: #FFF3E8;
+      border-left: 5px solid #ff6f00;
+      padding: 15px;
+      border-radius: 12px;
+    }
+    
+    /* Language Toggle Positioning */
+    .lang-toggle { position: fixed; top: 16px; right: 16px; z-index: 10000; display: flex; gap: 6px; }
+    .lang-btn { padding: 6px 14px; border-radius: 20px; border: 0.5px solid #E8E6E0; font-size: 12px; cursor: pointer; background: white; }
+    .lang-btn.active { background: #1A1A2E; color: white; }
+  </style>
 </head>
 <body>
 
-  <!-- Language Toggle -->
   <div class="lang-toggle">
     <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
     <button class="lang-btn" onclick="setLang('hi')" id="btn-hi">हि</button>
   </div>
 
-  <!-- Header -->
   <div class="header">
-    <a href="index.html" class="back-btn" data-en="← Back" data-hi="← वापस">← Back</a>
-    <h1 data-en="Rajesh Kirana" data-hi="राजेश किराना">Rajesh Kirana</h1>
-    <p data-en="📍 120m away • Open" data-hi="📍 120 मीटर दूर • खुला">📍 120m away • Open</p>
+    <h1 data-en="PassWaale" data-hi="पासवाले">PassWaale</h1>
+    <p id="header-subtext" data-en="📍 Shops near you" data-hi="📍 पास की दुकानें">📍 Shops near you</p>
   </div>
 
-  <div class="container">
+  <div class="container" style="padding-bottom: 100px;">
 
-    <p class="section-title" data-en="Available Items" data-hi="उपलब्ध आइटम">Available Items</p>
-
-    <!-- Item 1 -->
-    <div class="card item-card">
-      <div class="item-row">
-        <div class="item-info">
-          <p class="item-name" data-en="Atta 1kg" data-hi="आटा 1 किलो">Atta 1kg</p>
-          <p class="item-price">₹55</p>
-        </div>
-        <div class="item-right">
-          <span class="badge open" data-en="Available" data-hi="उपलब्ध">Available</span>
-          <button class="btn-add" id="addbtn1"
-            onclick="addToCart('Atta 1kg', 55, 'addbtn1')">
-            + Add
-          </button>
-        </div>
-      </div>
+    <div id="home-section">
+        <p class="section-title" data-en="Nearby Shops" data-hi="पास की दुकानें">Nearby Shops</p>
+        <a href="shop.html" class="card shop-card" style="text-decoration:none; color:inherit; display:block;">
+            <div style="display:flex; justify-content:space-between;">
+                <p style="font-weight:bold; margin:0;" data-en="Rajesh Kirana Store" data-hi="राजेश किराना स्टोर">Rajesh Kirana Store</p>
+                <span style="color:green; font-size:12px;" data-en="Open" data-hi="खुला">Open</span>
+            </div>
+            <p style="font-size:12px; color:#888;">120m away • ⭐ 4.5</p>
+        </a>
     </div>
 
-    <!-- Item 2 -->
-    <div class="card item-card">
-      <div class="item-row">
-        <div class="item-info">
-          <p class="item-name" data-en="Doodh 1L" data-hi="दूध 1 लीटर">Doodh 1L</p>
-          <p class="item-price">₹28</p>
+    <div id="profile-section">
+        <div class="profile-card">
+            <div class="profile-avatar">👤</div>
+            <h2 data-en="Parul Nishad" data-hi="परुल निषाद">Parul Nishad</h2>
+            <p style="color:#666;">+91 89577xxx</p>
         </div>
-        <div class="item-right">
-          <span class="badge closed" data-en="Out of Stock" data-hi="स्टॉक खत्म">Out of Stock</span>
-        </div>
-      </div>
-    </div>
 
-    <!-- Item 3 -->
-    <div class="card item-card">
-      <div class="item-row">
-        <div class="item-info">
-          <p class="item-name" data-en="Chawal 2kg" data-hi="चावल 2 किलो">Chawal 2kg</p>
-          <p class="item-price">₹120</p>
+        <p class="section-title" data-en="My Account" data-hi="मेरा खाता">My Account</p>
+        
+        <div class="khata-card">
+            <p style="margin:0; font-weight:bold;" data-en="📒 Personal Khata" data-hi="📒 मेरा खाता">📒 Personal Khata</p>
+            <p style="margin:5px 0 0 0; color: #ff6f00; font-size: 22px; font-weight: 800;" data-en="Pending: ₹240" data-hi="बकाया: ₹240">Pending: ₹240</p>
         </div>
-        <div class="item-right">
-          <span class="badge open" data-en="Available" data-hi="उपलब्ध">Available</span>
-          <button class="btn-add" id="addbtn2"
-            onclick="addToCart('Chawal 2kg', 120, 'addbtn2')">
-            + Add
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Item 4 -->
-    <div class="card item-card">
-      <div class="item-row">
-        <div class="item-info">
-          <p class="item-name" data-en="Cheeni 1kg" data-hi="चीनी 1 किलो">Cheeni 1kg</p>
-          <p class="item-price">₹45</p>
-        </div>
-        <div class="item-right">
-          <span class="badge open" data-en="Available" data-hi="उपलब्ध">Available</span>
-          <button class="btn-add" id="addbtn3"
-            onclick="addToCart('Cheeni 1kg', 45, 'addbtn3')">
-            + Add
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Item 5 -->
-    <div class="card item-card">
-      <div class="item-row">
-        <div class="item-info">
-          <p class="item-name" data-en="Namak 1kg" data-hi="नमक 1 किलो">Namak 1kg</p>
-          <p class="item-price">₹20</p>
-        </div>
-        <div class="item-right">
-          <span class="badge open" data-en="Available" data-hi="उपलब्ध">Available</span>
-          <button class="btn-add" id="addbtn4"
-            onclick="addToCart('Namak 1kg', 20, 'addbtn4')">
-            + Add
-          </button>
-        </div>
-      </div>
     </div>
 
   </div>
 
-  <!-- Cart Bar -->
-  <div class="cart-bar" id="cartBar">
-    <div class="cart-info">
-      <span id="cartCount">0 items</span>
-      <span id="cartTotal">₹0</span>
+  <div class="bottom-nav">
+    <div class="nav-links">
+        <div class="nav-item active" id="nav-home" onclick="showSection('home')">
+            <span class="nav-icon">🏪</span>
+            <span data-en="Shops" data-hi="दुकानें">Shops</span>
+        </div>
+        
+        <a href="orders.html" class="nav-item">
+            <span class="nav-icon">📋</span>
+            <span data-en="Orders" data-hi="ऑर्डर">Orders</span>
+        </a>
+        
+        <div class="nav-item" id="nav-profile" onclick="showSection('profile')">
+            <span class="nav-icon">👤</span>
+            <span data-en="Profile" data-hi="प्रोफ़ाइल">Profile</span>
+        </div>
     </div>
-    <a href="order.html" class="cart-btn" id="cartBtn">Order Now →</a>
-  </div>
+</div>
 
   <script src="../lang.js"></script>
   <script>
-    var cartItems = [];
-    var cartTotal = 0;
+    function showSection(section) {
+        const home = document.getElementById('home-section');
+        const profile = document.getElementById('profile-section');
+        const navHome = document.getElementById('nav-home');
+        const navProfile = document.getElementById('nav-profile');
+        const headerSub = document.getElementById('header-subtext');
 
-    function addToCart(name, price, btnId) {
-      cartItems.push(name);
-      cartTotal += price;
-
-      var button = document.getElementById(btnId);
-      button.textContent = currentLang === 'hi' ? '✓ जोड़ा' : '✓ Added';
-      button.style.background = '#1B7A45';
-      button.disabled = true;
-
-      var countText = currentLang === 'hi' ? cartItems.length + ' आइटम' : cartItems.length + ' items';
-      document.getElementById('cartCount').textContent = countText;
-      document.getElementById('cartTotal').textContent = '₹' + cartTotal;
-      document.getElementById('cartBtn').textContent = currentLang === 'hi' ? 'ऑर्डर करो →' : 'Order Now →';
-      document.getElementById('cartBar').style.display = 'flex';
-    }
-
-    // Language switch hone pe cart text bhi update karo
-    var originalSetLang = setLang;
-    setLang = function(lang) {
-      originalSetLang(lang);
-
-      // Add buttons update karo
-      var addBtns = document.querySelectorAll('.btn-add:not(:disabled)');
-      addBtns.forEach(function(btn) {
-        btn.textContent = lang === 'hi' ? '+ जोड़ो' : '+ Add';
-      });
-
-      // Cart bar update karo agar visible hai
-      if (cartItems.length > 0) {
-        var countText = lang === 'hi' ? cartItems.length + ' आइटम' : cartItems.length + ' items';
-        document.getElementById('cartCount').textContent = countText;
-        document.getElementById('cartBtn').textContent = lang === 'hi' ? 'ऑर्डर करो →' : 'Order Now →';
-      }
+        if (section === 'profile') {
+            home.style.display = 'none';
+            profile.style.display = 'block';
+            navHome.classList.remove('active');
+            navProfile.classList.add('active');
+            headerSub.innerText = "My Account";
+        } else {
+            home.style.display = 'block';
+            profile.style.display = 'none';
+            navHome.classList.add('active');
+            navProfile.classList.remove('active');
+            headerSub.innerText = "📍 Shops near you";
+        }
+        
+        // Language sync
+        if(typeof setLang === 'function') {
+            let currentLang = document.getElementById('btn-hi').classList.contains('active') ? 'hi' : 'en';
+            setLang(currentLang);
+        }
     }
   </script>
-
-  <style>
-    .lang-toggle {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      display: flex;
-      gap: 6px;
-      z-index: 100;
-    }
-    .lang-btn {
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 0.5px solid #E8E6E0;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      background: white;
-      color: #8888AA;
-    }
-    .lang-btn.active {
-      background: #1A1A2E;
-      color: white;
-      border-color: #1A1A2E;
-    }
-  </style>
-
 </body>
 </html>
